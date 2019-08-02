@@ -1,15 +1,27 @@
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
-@Entity(name="users")
+@Entity
 public class User {
 
     @Id
-    private int id;
+    private long id;
     private String firstName;
-    private String secondNname;
+    private String secondName;
 
-    public int getId() {
+    @OneToOne
+    private Laptop laptop;
+
+    public Laptop getLaptop() {
+        return laptop;
+    }
+
+    public void setLaptop(Laptop laptop) {
+        this.laptop = laptop;
+    }
+
+    public long getId() {
         return id;
     }
 
@@ -26,11 +38,11 @@ public class User {
     }
 
     public String getSecondNname() {
-        return secondNname;
+        return secondName;
     }
 
-    public void setSecondNname(String secondNname) {
-        this.secondNname = secondNname;
+    public void setSecondName(String secondNname) {
+        this.secondName = secondNname;
     }
 
     @Override
@@ -38,7 +50,8 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
-                ", secondNname='" + secondNname + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", laptop=" + laptop +
                 '}';
     }
 }

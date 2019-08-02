@@ -8,15 +8,26 @@ public class Main {
         User user = new User();
         user.setId(1);
         user.setFirstName("Mariusz");
-        user.setSecondNname("Szmer");
-        Configuration configuration = new Configuration().configure().addAnnotatedClass(User.class);
+        user.setSecondName("Szmer");
+
+        Laptop laptop = new Laptop();
+        laptop.setId(11);
+        laptop.setName("DELL");
+
+        Configuration configuration = new Configuration()
+                .configure()
+                .addAnnotatedClass(User.class)
+                .addAnnotatedClass(Laptop.class);
         SessionFactory sessionFactory = configuration.buildSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
+
         session.save(user);
-        user = session.get(User.class, 1);
+        session.save(laptop);
+
+//        user = session.get(User.class, 1);
         transaction.commit();
-        System.out.println(user);
+//        System.out.println(user);
 
 
 
