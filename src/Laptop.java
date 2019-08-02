@@ -10,7 +10,7 @@ public class Laptop {
     private long id;
     private String name;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = User.class)
     private User user;
 
     public User getUser() {
