@@ -1,24 +1,18 @@
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
 public class User {
 
     @Id
-    private long id;
+    private int id;
     private String firstName;
     private String secondName;
 
-    @OneToOne(targetEntity = Laptop.class)
-    private Laptop laptop;
-
-    public Laptop getLaptop() {
-        return laptop;
-    }
-
-    public void setLaptop(Laptop laptop) {
-        this.laptop = laptop;
+    public User(int id, String firstName, String secondName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.secondName = secondName;
     }
 
     public long getId() {
@@ -51,7 +45,6 @@ public class User {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
-                ", laptop=" + laptop +
                 '}';
     }
 }
