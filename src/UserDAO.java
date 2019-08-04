@@ -4,6 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import javax.persistence.Entity;
+import java.util.List;
 
 @Entity
 public class UserDAO {
@@ -11,7 +12,6 @@ public class UserDAO {
     private static SessionFactory sessionFactory;
 
     public void addUser(int id, String fname, String lname) {
-//        User user = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
 
@@ -27,6 +27,24 @@ public class UserDAO {
             if(transaction != null)
                 transaction.rollback();
                 e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    public void retriveAllUsers() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+            List users = session.createQuery("from User").list();
+            users.stream().forEach(System.out::println);
+            transaction.commit();
+        } catch (HibernateException e) {
+            if(transaction != null)
+                transaction.rollback();
+            e.printStackTrace();
         } finally {
             session.close();
         }
