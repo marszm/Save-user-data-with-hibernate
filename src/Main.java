@@ -18,7 +18,8 @@ public class Main {
 
         //Update User
 
-
+        userDAO.updateUser(3,"LEZEK","SZMER");
+        userDAO.retriveAllUsers();
 
         //Delete User
 

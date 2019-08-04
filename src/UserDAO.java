@@ -70,6 +70,28 @@ public class UserDAO {
         } finally {
             session.close();
         }
+    }
+
+    public void updateUser(int id, String fname, String lname){
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+            User user = new User();
+            user.setId(id);
+            user.setFirstName(fname);
+            user.setSecondName(lname);
+            session.update(user);
+            transaction.commit();
+        } catch (HibernateException e) {
+            if(transaction != null)
+                transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
 
     }
 }
