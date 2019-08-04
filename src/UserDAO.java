@@ -49,4 +49,27 @@ public class UserDAO {
             session.close();
         }
     }
+
+    public void deleteUser(int id, String fname, String lname) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+            User user = new User();
+            user.setId(id);
+            user.setFirstName(fname);
+            user.setSecondName(lname);
+            session.delete(user);
+            transaction.commit();
+        } catch (HibernateException e) {
+            if(transaction != null)
+                transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+    }
 }

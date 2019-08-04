@@ -21,5 +21,8 @@ public class Main {
 
 
         //Delete User
+
+        userDAO.deleteUser(1,"Mariusz","Szmer");
+        userDAO.retriveAllUsers();
     }
 }
