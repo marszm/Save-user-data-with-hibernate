@@ -15,25 +15,21 @@ public class User {
         this.secondName = secondName;
     }
 
+    public User() {
+    }
+
     public long getId() {
         return id;
     }
 
-    void setId(int id) {
+    public void setId(int id) {
         this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
     }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getSecondNname() {
-        return secondName;
-    }
 
     public void setSecondName(String secondNname) {
         this.secondName = secondNname;

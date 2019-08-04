@@ -3,18 +3,24 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import javax.persistence.Entity;
+
+@Entity
 public class UserDAO {
 
-    SessionFactory sessionFactory = null;
+    private static SessionFactory sessionFactory;
 
-    public User addUser(int id, String fname, String lname) {
-        User user = null;
-        Session session = sessionFactory.openSession();
+    public void addUser(int id, String fname, String lname) {
+//        User user = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
 
         try {
             transaction = session.beginTransaction();
-            user = new User(id, fname, lname);
+            User user = new User();
+            user.setId(id);
+            user.setFirstName(fname);
+            user.setSecondName(lname);
             session.save(user);
             transaction.commit();
         } catch (HibernateException e) {
@@ -24,7 +30,5 @@ public class UserDAO {
         } finally {
             session.close();
         }
-    return user;
     }
-
 }
